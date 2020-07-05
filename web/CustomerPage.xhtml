@@ -1,0 +1,172 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Customers Page</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <h:outputStylesheet name="css/generalPageTheme.css"/>
+        <h:outputStylesheet name="css/navegation.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+        <style>
+            .control input {
+                margin: 10px 15px 10px 12px;
+            }
+        </style>
+    </h:head>
+
+    <h:body>
+        <h:form> 
+            <div class="header">
+                <h1>IMS</h1>
+            </div>
+
+            <div class="topnav" >
+
+                <p:link value="Home" outcome="userPage" ></p:link>
+                <p:link value="Category" outcome="categoryPage" ></p:link>
+                <p:link value="Products" outcome="ProductPage" ></p:link>
+                <p:link value="Suppliers" outcome="supplierPage" ></p:link>
+                <p:link value="Customers" outcome="CustomerPage" ></p:link> 
+                <p:link value="Invoice" outcome="invoicePage" ></p:link>
+                <p:link value="Order" outcome="OrderPage" ></p:link>
+
+                <p:link value="Sign out" outcome="index" style="float: right" ></p:link>
+
+
+            </div>
+            <div class="row">
+                <h:form>
+                    <div class="column side" style="padding: 25px; width: 40%;" >
+
+                        <table border="0">
+
+                            <tbody>
+                                <tr>
+                                    <h3> </h3>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h:outputText value="Search by ID"/>
+                                    </td>
+                                    <td>
+                                        <h:selectOneMenu id="city" value="#{selectCustomer.selectedItem}" >
+                                            <f:selectItem  itemValue="" />
+                                            <f:selectItems value="#{selectCustomer.options}" />
+                                        </h:selectOneMenu>
+
+
+                                        <h:commandButton value="select" action="#{selectCustomer.selectCustomerBtn()}" style="margin: 0 15px 0 15px" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>search by name</td>
+                                    <td> <p:inputText value="#{selectCustomer.nameSearch}" maxlength="20"/></td>
+                                    <td><h:commandButton value="search" action="#{selectCustomer.selectCustomerByName()}" /></td>
+                                </tr>
+                                <tr >
+                                    <td  >
+                                        <p:separator/>
+                                    </td> 
+                                    <td>
+                                        <p:separator/>
+                                    </td>
+                                    <td>
+                                        <p:separator/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Name:</td>
+                                    <td> <p:inputText value="#{selectCustomer.fullname}" maxlength="50"/> </td>
+                                </tr>
+
+                                <tr> 
+                                    <td>Address:</td>
+                                    <td> <p:inputText value="#{selectCustomer.address}"  maxlength="50" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>Email:</td>
+                                    <td> <p:inputText value="#{selectCustomer.email}"  maxlength="50" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>Phone:</td>
+                                    <td> <p:inputText value="#{selectCustomer.phone}"  maxlength="20" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>company</td>
+                                    <td> <p:inputText value="#{selectCustomer.company}"  maxlength="20" /> </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                        <div class="control">
+                            <h:commandButton action="#{selectCustomer.selectCustomerInsert()}" value="insert"/>
+                            <h:commandButton action="#{selectCustomer.selectCustomerUpdate()}" value="update"/>
+                            <h:commandButton action="#{selectCustomer.selectCustomerDelete()}" value="delete"/> 
+                            <h:commandButton action="#{selectCustomer.reset()}" value="Reset"/> 
+
+                            <h:messages infoStyle="color:green" errorStyle="color:red"/>
+                        </div>
+                    </div>
+                </h:form>
+                <!-- this the column in the middle page  -->
+                <div class="column middle" style="width: 50%;">
+                    <h1>  <h:outputText value="Customer Detail" /></h1>
+                    <h:dataTable border="1" value="#{selectCustomer.cusData}" var="user" >
+                        <h:column>
+                            <f:facet name="header">ID</f:facet>
+                                #{user.cid}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Full Name</f:facet>
+                                #{user.fullname}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Address</f:facet>
+                                #{user.address}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Email</f:facet>
+                                #{user.email}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Phone</f:facet>
+                                #{user.phone}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Company</f:facet>
+                                #{user.company}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Register Date</f:facet>
+                                #{user.date}
+                        </h:column>
+
+                    </h:dataTable>
+                </div>
+
+                <div class="column side" style="width: 10%;">
+                    <h2></h2>
+                    <p></p>
+                </div>
+            </div> 
+
+            <div class="footer">
+                <p>All Rights Reserved</p>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

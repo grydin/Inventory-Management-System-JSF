@@ -1,0 +1,300 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Orders page</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <h:outputStylesheet name="css/generalPageTheme.css"/>
+        <h:outputStylesheet name="css/navegation.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+        <style>
+            .control input {
+                margin: 10px 15px 10px 12px;
+            }
+            .space {
+                margin: 0px 15px 0px 12px;
+            }
+            .buttonFont {
+                font-size: 15px;
+            }
+            .parant .product {
+                display: block;
+                /*background-color: #64ef6a;*/
+                float: left;
+                width: 50%;
+            }
+            .parant .order {
+                display: block;
+                /*                background-color: #00BCD4;*/
+                float: left;
+                width: 50%;
+                padding-left: 10px;
+            }
+        </style>
+    </h:head>
+
+    <h:body>
+        <h:form> 
+            <div class="header">
+                <h1>IMS</h1>
+            </div>
+
+            <div class="topnav" >               
+
+                <p:link value="Home" outcome="userPage" ></p:link>
+                <p:link value="Category" outcome="categoryPage" ></p:link>
+                <p:link value="Products" outcome="ProductPage" ></p:link>
+                <p:link value="Suppliers" outcome="supplierPage" ></p:link>
+                <p:link value="Customers" outcome="CustomerPage" ></p:link> 
+                <p:link value="Invoice" outcome="invoicePage" ></p:link>
+                <p:link value="Order" outcome="OrderPage" ></p:link>
+
+                <p:link value="Sign out" outcome="index" style="float: right" ></p:link>
+
+            </div>
+
+            <div class="row">
+                <h:form>
+                    <div class="column side" style="padding: 25px; width: 100%;" > 
+                        <!-- *********************************************************Customer********************************************************* -->
+                        <div class="customer">
+                            <table border="0">
+                                <tbody>
+
+                                    <tr>
+                                        <h1>  <h:outputText value="Add Customer" /> </h1>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <h:outputText value="search customer by name:" />
+                                        </td>
+                                        <td> 
+                                            <p:inputText value="#{orderBean.customerNameSearch}" maxlength="20"/>
+                                        </td>
+                                        <td> 
+                                            <h:commandButton value="search" action="#{orderBean.searchCustomer()}" class="buttonFont" />
+                                        </td>
+                                    </tr>
+                                    <br/>
+                                    <tr>
+                                        <td>
+                                            <h:outputText value="Enter Customer ID: " />
+                                        </td>
+                                        <td> 
+                                            <p:inputText value="#{orderBean.selectedCustomer}" maxlength="20"/>
+                                            <!---->
+                                        </td>                                     
+
+                                    </tr>
+                                    <tr>
+                                        <h:dataTable border="1" value="#{orderBean.customerData}" var="customer" >
+                                            <h:column>
+                                                <f:facet name="header">ID</f:facet>
+                                                    #{customer.cid}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">Full Name</f:facet>
+                                                    #{customer.fullname}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">Address</f:facet>
+                                                    #{customer.address}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">Email</f:facet>
+                                                    #{customer.email}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">Phone</f:facet>
+                                                    #{customer.phone}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">Company</f:facet>
+                                                    #{customer.company}
+                                            </h:column>
+
+                                            <h:column>
+                                                <f:facet name="header">Register Date</f:facet>
+                                                    #{customer.date}
+                                            </h:column>
+                                        </h:dataTable>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p:separator />
+                        <!-- *********************************************************Product********************************************************* -->
+                        <div class="parant">
+                            <div class="product"> 
+                                <table>
+                                    <tbody>                                                   
+
+                                        <tr>
+                                            <h1> Select Product</h1>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h:outputText value="Search by product name" />
+                                            </td>                                  
+                                            <td>
+                                                <p:inputText value="#{orderBean.productNameSearch}" maxlength="20" style="width: 50%"/> 
+                                                <h:commandButton value="search" action="#{orderBean.searchProduct()}" class="buttonFont space " /> 
+                                            </td> 
+                                        </tr>
+                                        <tr>                                            
+                                            <td> 
+                                                <h:outputText value="filter by category" /> 
+                                            </td>
+                                            <td>
+                                                <h:selectOneMenu id="city2" value="#{orderBean.selectedItemCategoryName}">
+                                                    <f:selectItem itemValue="" />
+                                                    <f:selectItems value="#{orderBean.optionsCategory}" />
+                                                </h:selectOneMenu>
+
+                                                <h:commandButton value="search " action="#{orderBean.searchProductByCategory()}" class="buttonFont space" />
+
+                                                <h:commandButton value="reset " class="buttonFont space" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <h:dataTable border="1" value="#{orderBean.productData}" var="product" >
+                                                <h:column>
+                                                    <f:facet name="header">ID</f:facet>
+                                                        #{product.pid}
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Name</f:facet>
+                                                        #{product.name}
+                                                </h:column>
+
+                                                <h:column>
+                                                    <f:facet name="header">description</f:facet>
+                                                        #{product.description}
+                                                </h:column>
+
+                                                <h:column>
+                                                    <f:facet name="header">price</f:facet>
+                                                        #{product.price}
+                                                </h:column>
+
+                                                <h:column>
+                                                    <f:facet name="header">quantity</f:facet>
+                                                        #{product.quantity}
+                                                </h:column>                                       
+                                            </h:dataTable><br/>
+                                        </tr> 
+                                        <tr>
+                                            <td>
+                                                <h:outputLabel value="Select Product ID:" />
+                                                <h:selectOneMenu id="city3" value="#{orderBean.selectedItemProductID}">
+                                                    <f:selectItem  itemValue="" />
+                                                    <f:selectItems value="#{orderBean.optionsProduct}" />
+                                                </h:selectOneMenu>
+                                            </td>
+                                            <br/>
+                                            <td>
+                                                <h:outputText value="Enter Qunatity: " />
+                                                <p:inputText value="#{orderBean.currentQuantity}" maxlength="20" style="width: 10%"/>
+
+                                            </td>
+                                            <td>
+                                                <h:commandButton action="#{orderBean.addBtn()}" value='Add' class="buttonFont"/>
+                                                <h:messages infoStyle="color:green" errorStyle="color:red"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- *********************************************************Order********************************************************* -->
+                            <div class="order">
+                                <table>
+                                    <tbody>                                        
+                                        <tr>
+                                            <h1>Added Orders </h1>
+                                        </tr>
+                                        <tr>
+                                            <h:dataTable border="1" value="#{orderBean.orderData}" var="order" >
+                                                <h:column>
+                                                    <f:facet name="header">ID</f:facet>
+                                                        #{order.oid}
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Product ID</f:facet>
+                                                        #{order.opid}
+                                                </h:column>
+
+                                                <h:column>
+                                                    <f:facet name="header">P-Name</f:facet>
+                                                        #{order.opname}
+                                                </h:column>
+
+                                                <h:column>
+                                                    <f:facet name="header">price</f:facet>
+                                                        #{order.oprice}
+                                                </h:column>
+
+                                                <h:column>
+                                                    <f:facet name="header">quantity</f:facet>
+                                                        #{order.oquantity}
+                                                </h:column>
+
+                                                <h:column>
+                                                    <f:facet name="header">total</f:facet>
+                                                        #{order.ototal}
+                                                </h:column>
+
+                                                <h:column>
+                                                    <f:facet name="header">inv ID</f:facet>
+                                                        #{order.oinvoice}
+                                                </h:column>
+                                            </h:dataTable>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <br/>
+                                                <h:outputText value="Enter order ID to be Deleted:" /> 
+                                            </td>
+                                            <td>
+                                                <p:inputText value="#{orderBean.selectedItemOrderID}" maxlength="20" style="width: 25%"/> 
+                                            </td>
+                                            <td>
+                                                <h:commandButton action="#{orderBean.deleteOrder()}" value="Delete" /> 
+                                            </td>                                            
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <br/> <br/>
+                                                <h:outputLabel value="total Price:" style="font-size: 25px"/> 
+                                            </td>
+                                            <td>
+                                                <h:outputFormat class="finalPrice" value="#{orderBean.finalTotalPrice}" style="border: 1px dashed black ; font-size: 25px" />
+                                            </td>
+                                            <br/> <br/>
+                                            <td>                                                
+                                                <h:commandButton action="#{orderBean.confirmOrder()}" value="confirm Order" class="buttonFont"/> 
+
+                                                <h:messages infoStyle="color:green" errorStyle="color:red"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div> 
+                </h:form>
+            </div> <!-- this the Row div -->
+
+            <div class="footer">
+                <p>All Rights Reserved</p>
+            </div>
+
+        </h:form> 
+    </h:body>
+</html>

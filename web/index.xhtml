@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>sign in Page</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+         <h:outputStylesheet name="css/generalPageTheme.css" />
+         <h:outputStylesheet name="css/navegation.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+    </h:head>
+
+
+    <h:body>
+        <h:form> 
+            <div class="header">
+                <h1>IMS</h1>
+                <p>Welcome to this page of the inventory management system</p>
+            </div>
+
+            <div class="topnav" >
+                <label>Welcome </label>
+            </div>
+            <!--   -->
+            <div class="row">
+
+                <h:form>
+                    <div class="column side" style="padding: 25px;" >
+                        <div class="inputWithIcon">
+                            <h:inputText  pt:placeholder="username" value="#{signIn.name}" /> 
+                            <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
+                        </div>
+
+                        <div class="inputWithIcon">
+                            <h:inputSecret  pt:placeholder="Password"    value="#{signIn.password}" /> 
+                            <i class="fa fa-key fa-lg fa-fw" aria-hidden="true"></i>
+                        </div>
+
+                        <p:commandButton value="Login" action="#{signIn.checkLogin()}" update="messages" />
+                        
+                        <p:messages id="messages"  closable="true" />
+
+                    </div>
+                </h:form>
+
+                <div class="column middle">
+                    <h2></h2>
+                    <p></p>
+                </div>
+
+                <div class="column side">
+                    <h2></h2>
+                    <p> </p>
+                    <ul>                        
+                       
+                    </ul>
+                </div>
+            </div>
+           
+            <div class="footer">
+                 <p>All Rights Reserved</p>
+            </div>
+            
+            
+        </h:form>
+    </h:body>
+</html>
+

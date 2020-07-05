@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Invoice Page</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <h:outputStylesheet name="css/generalPageTheme.css"/>
+        <h:outputStylesheet name="css/navegation.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+        <style>
+            .control input {
+                margin: 10px 15px 10px 12px;
+            }
+        </style>
+    </h:head>
+
+    <h:body>
+        <h:form> 
+            <div class="header">
+                <h1>IMS</h1>
+            </div>
+
+            <div class="topnav">
+
+                <p:link value="Home" outcome="userPage" ></p:link>
+                <p:link value="Category" outcome="categoryPage" ></p:link>
+                <p:link value="Products" outcome="ProductPage" ></p:link>
+                <p:link value="Suppliers" outcome="supplierPage" ></p:link>
+                <p:link value="Customers" outcome="CustomerPage" ></p:link> 
+                <p:link value="Invoice" outcome="invoicePage" ></p:link>
+                <p:link value="Order" outcome="OrderPage" ></p:link>
+
+                <p:link value="Sign out" outcome="index" style="float: right" ></p:link>
+
+
+            </div>
+
+            <div class="row">
+
+
+                <div class="column side" style="padding: 25px; width: 30%;" >
+                    <table border="0">
+                        <tbody>
+                            <tr>
+                                <h3> </h3>
+                            </tr>
+                            <tr>
+                                <!--                                <h:outputText value="Select invoice ID"/>-->
+                            </tr>                                                              
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <!-- *********************************************************middle************************************* -->
+
+                <div class="column middle" style="width: 60%; overflow: auto;">
+
+                    <h1>  <h:outputText value="Invoice Detail" /></h1>
+                    <h:dataTable border="1" value="#{fillInvoice.invoiceInfo}" var="yes" >
+
+                        <h:column>
+                            <f:facet name="header">Invoice ID</f:facet>
+                                #{yes.invoiceID}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Employee Name</f:facet>
+                                #{yes.geteName()}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Customer Name</f:facet>
+                                #{yes.getcName()}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Purchased Date</f:facet>
+                                #{yes.purchaseDate}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Total Price</f:facet>
+                                #{yes.totalPrice}
+                        </h:column>
+
+                    </h:dataTable>
+                </div>
+
+                <div class="column side" style="width: 10%;">
+                    <h2></h2>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>All Rights Reserved</p>
+            </div>
+        </h:form>
+    </h:body>
+</html>

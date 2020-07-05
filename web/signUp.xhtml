@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Add new user</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <h:outputStylesheet name="css/generalPageTheme.css" />
+        <h:outputStylesheet name="css/navegation.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+    </h:head>
+
+
+    <h:body>
+        <h:form>
+            <div class="header">
+                <h1>IMS</h1>
+            </div>
+
+            <div class="topnav" >
+
+                <p:link value="Home" outcome="adminPage" ></p:link>
+                <div class="dropdown">
+                    <p:commandLink class="dropdown-btn button"> Manage Users
+                        <i class="fa fa-angle-double-down"></i>
+                    </p:commandLink>
+                    <div class="dropdown-content">
+                        <p:link value="Modify Users" outcome="displayUsers" > </p:link>
+                        <p:link value="Add Users" outcome="signUp"> </p:link>
+                    </div>
+                </div>   
+
+                <p:link value="Category" outcome="categoryPage2" ></p:link>
+                <p:link value="Products" outcome="ProductPage2" ></p:link>
+                <p:link value="Suppliers" outcome="supplierPage2" ></p:link>
+                <p:link value="Customers" outcome="CustomerPage2" ></p:link> 
+                <p:link value="Invoice" outcome="invoicePage2" ></p:link>
+                <p:link value="Order" outcome="OrderPage2" ></p:link>
+
+            </div>
+
+            <div class="row">
+
+                <div class="column side" style="padding: 25px;" >
+
+                </div>
+
+                <div class="column middle">
+                    <h2>Sign-up new User</h2>
+                    <table border="0">
+
+                        <tbody>
+                            <tr>
+                                <td>Name:</td>
+                                <td> <p:inputText value="#{signUp.name}" pt:placeholder="Fullname" maxlength="50"  /> </td>
+                            </tr>
+
+                            <tr>
+                                <td>Username:</td>
+                                <td> <p:inputText value="#{signUp.username}"  pt:placeholder="username" maxlength="50"   /> </td>
+                            </tr>
+
+                            <tr> 
+                                <td>Address:</td>
+                                <td> <p:inputText value="#{signUp.address}" maxlength="50" /> </td>
+                            </tr>
+                            <tr>
+                                <td>Email:</td>
+                                <td> <p:inputText value="#{signUp.email}" maxlength="50" /> </td>
+                            </tr>
+                            <tr>
+                                <td>Phone number:</td>
+                                <td> <p:inputText value="#{signUp.phone}" maxlength="20" /> </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p:outputLabel for="type" value="Specialty"/>
+                                </td>
+                                <td>
+                                    <p:selectOneRadio id="type" value="#{signUp.type}" required="true">
+                                        <f:selectItem itemLabel="Administrator" itemValue="admin"/>
+                                        <f:selectItem itemLabel="User" itemValue="user"/>
+                                    </p:selectOneRadio>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>password:</td>
+                                <td> <h:inputSecret value="#{signUp.password}" /> </td>
+                            </tr> 
+                            <tr>
+                                <td>re-enter password:</td>
+                                <td> <h:inputSecret value="#{signUp.rePassword}" /> </td>
+                            </tr>
+
+                        </tbody>
+                    </table>                          
+                    <h:commandButton action="#{signUp.sign()}" value="Submit"/> 
+                    <h:messages infoStyle="color:green" errorStyle="color:red"/> 
+                </div>
+
+                <div class="column side">
+                    <h2></h2>
+                    <p></p>
+                    <ul>
+                        <li></li>
+                    </ul>               
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>All Rights Reserved</p>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

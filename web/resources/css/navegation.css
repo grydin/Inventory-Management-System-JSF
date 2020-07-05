@@ -1,0 +1,73 @@
+/* Style the top navigation bar */
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+}
+
+/* Style the topnav links */
+.topnav a, .topnav label
+{
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.dropdown {
+    float: left;
+}
+
+.dropdown-btn {
+    background-color: inherit;
+    color: #f2f2f2;
+    border: none;
+    outline: none;
+    padding: 14px 16px;
+}
+.dropdown-content {
+    display: none;
+  /*  position: absolute; */
+    background-color: #ccc;
+    float: none;
+    box-shadow: 1px 7px 16px 0 #eae9e9;
+}
+/*
+1st:#565555
+2nd: #757575
+
+*/
+/*This is the box that is displayed after you hover over the element*/
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color:#757575 ;
+    float: none;
+    box-shadow: 1px 7px 16px 0 #eae9e9;
+    min-width: 270px;
+    margin: 49px 0px 0 0;
+    overflow: auto;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown-content a {
+    float: none;
+    padding: 14px 16px;
+    display: block;
+    text-align: left;
+}
+

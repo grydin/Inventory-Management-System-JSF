@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Category Page</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <h:outputStylesheet name="css/generalPageTheme.css"/>
+        <h:outputStylesheet name="css/navegation.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+        <style>
+            .control input {
+                margin: 10px 15px 10px 12px;
+            }
+        </style>
+    </h:head>
+
+    <h:body>
+        <h:form> 
+            <div class="header">
+                <h1>IMS</h1>
+            </div>
+
+            <div class="topnav" >
+
+                <p:link value="Home" outcome="adminPage" ></p:link>
+                <div class="dropdown">
+                    <p:commandLink class="dropdown-btn button"> Manage Users
+                        <i class="fa fa-angle-double-down"></i>
+                    </p:commandLink>
+                    <div class="dropdown-content">
+                        <p:link value="Modify Users" outcome="displayUsers" > </p:link>
+                        <p:link value="Add Users" outcome="signUp"> </p:link>
+                    </div>
+                </div>   
+
+                <p:link value="Category" outcome="categoryPage2" ></p:link>
+                <p:link value="Products" outcome="ProductPage2" ></p:link>
+                <p:link value="Suppliers" outcome="supplierPage2" ></p:link>
+                <p:link value="Customers" outcome="CustomerPage2" ></p:link> 
+                <p:link value="Invoice" outcome="invoicePage2" ></p:link>
+                <p:link value="Order" outcome="OrderPage2" ></p:link>
+                
+                <p:link value="Sign out" outcome="index" style="float: right" ></p:link>
+
+            </div>
+            <div class="row">
+                <!--  this is the side column from the left  -->
+                <h:form>
+                    <div class="column side" style="padding: 25px; width: 30%;" >
+
+                        <table border="0">
+
+                            <tbody>
+                                <tr>
+                                    <h3>search </h3>
+                                </tr>
+                                <tr>
+                                    <h:outputText value="Select Category ID"/>
+                                    <h:selectOneMenu value="#{selectCategory.catid}" style="margin: 0px 15px 0 15px;" >
+                                        <f:selectItems value="#{fillCategory.categoryId}" />
+                                        <f:selectItem itemValue="0" itemLabel="select ID" />
+                                    </h:selectOneMenu>
+                                    <h:commandButton id="select" style="margin: 0px 15px 0 0px;" value="select" action="#{selectCategory.select()}" />
+                                </tr>
+                                <tr>
+                                    <td  >
+                                        <p:separator/>
+                                    </td> 
+                                    <td>
+                                        <p:separator/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Name:</td>
+                                    <td> <p:inputText value="#{selectCategory.name}" maxlength="50" /> </td>
+                                </tr>                                
+                            </tbody>
+                        </table>
+
+                        <div class="control">
+                            <h:commandButton action="#{selectCategory.insert()}" value="insert"/>
+                            <h:commandButton action="#{selectCategory.update()}" value="update"/>
+                            <h:commandButton action="#{selectCategory.delete()}" value="delete"/> 
+                            <h:commandButton action="#{selectCategory.reset()}" value="Reset"/> 
+
+                            <h:messages infoStyle="color:green" errorStyle="color:red"/>
+                        </div>
+                    </div>
+                </h:form>
+                <!-- this the column in the middle page  -->
+                <div class="column middle" style="width: 60%; overflow: auto;">
+                    <h1>  <h:outputText value="Category Detail" /></h1>
+                    <h:dataTable border="1" value="#{fillCategory.categoryInfo}" var="category" >
+
+                        <h:column>
+                            <f:facet name="header">ID</f:facet>
+                                #{category.catid}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Name</f:facet>
+                                #{category.name}
+                        </h:column>  
+
+                    </h:dataTable>
+                </div>
+
+                <div class="column side" style="width: 10%;">
+                    <h2></h2>
+                    <p> </p>
+                    <ul>
+                        <li></li>
+                    </ul>                
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>All Rights Reserved</p>
+            </div>
+        </h:form>
+    </h:body>
+</html>
